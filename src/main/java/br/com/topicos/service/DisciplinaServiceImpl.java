@@ -78,4 +78,5 @@ public class DisciplinaServiceImpl implements DisciplinaService {
         disciplina.getAlunos().add(alunoService.buscarPorId(alunoId));
         repo.save(disciplina);
     }
+
 }

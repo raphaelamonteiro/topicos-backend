@@ -1,6 +1,7 @@
 package br.com.topicos.entity;
 
 import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,14 +9,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "dis_disciplina")
 public class Disciplina {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dis_id")
@@ -35,11 +37,7 @@ public class Disciplina {
     private Curso curso;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "mat_matricula",
-        joinColumns = @JoinColumn(name = "mat_dis_id"),
-        inverseJoinColumns = @JoinColumn(name = "mat_aln_id")
-    )
+    @JoinTable(name = "mat_matricula", joinColumns = @JoinColumn(name = "mat_dis_id"), inverseJoinColumns = @JoinColumn(name = "mat_aln_id"))
     private Set<Aluno> alunos;
 
     public Long getId() {
@@ -89,5 +87,5 @@ public class Disciplina {
     public void setAlunos(Set<Aluno> alunos) {
         this.alunos = alunos;
     }
-    
+
 }
