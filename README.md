@@ -49,9 +49,6 @@ Você pode encontrar minhas anotações em [docs/](docs/)
 | **Repository** | Interface que estende `JpaRepository` (CRUD pronto) |
 | **Service** | Camada de regras de negócio |
 | **Controller** | Camada HTTP (recebe requests, devolve responses) |
-| **DTO** | Objeto para transferir dados entre camadas |
-| **Flyway** | Ferramenta de versionamento de schema do banco |
-| **Testcontainers** | Biblioteca que sobe containers para testes |
 | **Dev Container** | Ambiente de dev dentro de um container Docker |
 
 ## 🚀 Como Executar <a id="executar"></a>
@@ -85,15 +82,28 @@ mvn spring-boot:run
 ## 🧩 Comandos Úteis <a id="comandos"></a>
 
 ```sh
-# Limpa o projeto e executa os testes
+# Executa somente os testes
+mvn test
+
+# Limpa o projeto e executa os testes novamente
 mvn clean test
 
-# Compila e gera o arquivo .jar em target/
+# Compila o projeto e gera o arquivo .jar em target/
 mvn clean package
 
 # Exibe a árvore de dependências para verificar conflitos
 mvn dependency:tree
 
+# Executa a aplicação Spring Boot
+mvn spring-boot:run
+```
+
+> 💡 Se o Maven não estiver instalado no ambiente, utilize o Maven Wrapper:
+
+```sh
+./mvnw test
+./mvnw clean test
+./mvnw spring-boot:run
 ```
 
 ## 📦 Dependências do Projeto <a id="dependencias"></a>
@@ -107,7 +117,7 @@ Adicionadas com o [Spring Initializr](https://start.spring.io/)
 * [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 * [SQLTools PostgreSQL/Cockroach Driver](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools-driver-pg#review-details)
 * [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-* [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client) 
+* [Flashpost](https://marketplace.visualstudio.com/items?itemName=VASubasRaj.flashpost) 
 
 
 ## 🏗️ Arquitetura <a id="arquitetura"></a>

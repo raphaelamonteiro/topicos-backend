@@ -1,3 +1,4 @@
+-- Criação das tabelas na ordem correta
 create table aln_aluno (
     aln_id bigint generated always as identity,
     aln_ra bigint not null,
@@ -30,31 +31,6 @@ create table mat_matricula (
     constraint mat_aln_fk foreign key (mat_aln_id) references aln_aluno(aln_id),
     constraint mat_dis_fk foreign key (mat_dis_id) references dis_disciplina(dis_id)
 );
-insert into aln_aluno(aln_ra, aln_nome, aln_data_nascimento)
-values (1, 'John Doe', '08-10-2001'),
-    (2, 'Jane Smith', '10-21-2002');
-insert into cur_curso(cur_sigla, cur_nome)
-values ('BD', 'Banco de Dados'),
-    ('ADS', 'Análise e Desenvolvimento de Sistemas');
-insert into dis_disciplina(
-        dis_codigo,
-        dis_nome,
-        dis_carga_horaria,
-        dis_cur_id
-    )
-values (
-        'IMB003',
-        'Arquitetura e Modelagem de Banco de Dados',
-        80,
-        1
-    ),
-    ('IES001', 'Engenharia de Software I', null, 1);
-insert into mat_matricula(mat_aln_id, mat_dis_id)
-values (1, 1),
-    (1, 2),
-    (2, 1);
-drop user if exists spring;
-create user spring with password 'pass123';
 create table tra_trabalho (
     tra_id bigint generated always as identity,
     tra_titulo varchar(100) not null unique,
@@ -66,27 +42,10 @@ create table tra_trabalho (
     primary key(tra_id),
     constraint tra_aln_fk foreign key(tra_aluno) references aln_aluno(aln_id)
 );
-insert into tra_trabalho (
-        tra_titulo,
-        tra_data_hora_entrega,
-        tra_aluno,
-        tra_nota,
-        tra_justificativa
-    )
-values (
-        'Teste 1',
-        current_timestamp,
-        1,
-        6,
-        'Bom, mas falta conteúdo'
-    ),
-    (
-        'Teste 2',
-        current_timestamp,
-        2,
-        null,
-        'Incompleto'
-    );
+-- Usuário da aplicação
+drop user if exists spring;
+create user spring with password 'pass123';
+-- Permissões
 grant update,
     delete,
     insert,
