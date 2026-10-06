@@ -10,16 +10,10 @@ import br.com.topicos.entity.Auditoria;
 
 public interface AuditoriaRepository extends JpaRepository<Auditoria, Long> {
 
-    List<Auditoria> findByAudNomeAntigoContainingIgnoreCase(String audNomeAntigo);
+        List<Auditoria> findByAudNomeAntigoContainingIgnoreCase(String audNomeAntigo);
 
-    @Query("SELECT a FROM Auditoria a WHERE LOWER(a.audNomeAntigo) LIKE LOWER(CONCAT('%', :nomeAntigo, '%'))")
-    List<Auditoria> buscarPorNomeAntigo(@Param("nomeAntigo") String nomeAntigo);
-
-    @Query("SELECT a FROM Auditoria a WHERE LOWER(a.audNomeAntigo) LIKE LOWER(CONCAT('%', :nomeAntigo, '%')) AND a.curso.nome = :nomeCurso")
-    List<Auditoria> buscarPorNomeAntigoECurso(
-            @Param("nomeAntigo") String nomeAntigo,
-            @Param("nomeCurso") String nomeCurso);
-
-    List<Auditoria> findByAudNomeAntigoContainingIgnoreCaseAndCursoNome(
-            String audNomeAntigo, String cursoNome);
+        @Query("SELECT a FROM Auditoria a WHERE LOWER(a.audNomeAntigo) LIKE LOWER(CONCAT('%', :nomeAntigo, '%')) AND a.curso.nome = :nomeCurso")
+        List<Auditoria> buscarPorNomeAntigoECurso(
+                        @Param("nomeAntigo") String nomeAntigo,
+                        @Param("nomeCurso") String nomeCurso);
 }

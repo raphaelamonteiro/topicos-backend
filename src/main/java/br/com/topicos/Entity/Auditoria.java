@@ -34,7 +34,7 @@ public class Auditoria {
     private Curso curso;
 
     @Column(name = "aud_autorizacao")
-    private int audAutorizacao;
+    private Integer audAutorizacao;
 
     public Long getId() {
         return id;
@@ -76,11 +76,11 @@ public class Auditoria {
         this.curso = curso;
     }
 
-    public int getAudAutorizacao() {
+    public Integer getAudAutorizacao() {
         return audAutorizacao;
     }
 
-    public void setAudAutorizacao(int audAutorizacao) {
+    public void setAudAutorizacao(Integer audAutorizacao) {
         this.audAutorizacao = audAutorizacao;
     }
 

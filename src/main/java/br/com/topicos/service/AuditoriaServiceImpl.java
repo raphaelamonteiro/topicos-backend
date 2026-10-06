@@ -1,5 +1,6 @@
 package br.com.topicos.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -31,11 +32,15 @@ public class AuditoriaServiceImpl implements AuditoriaService {
                 auditoria.getAudNomeAntigo().isBlank() ||
                 auditoria.getAudNomeNovo() == null ||
                 auditoria.getAudNomeNovo().isBlank() ||
-                auditoria.getAudDataHora() == null ||
                 auditoria.getCurso() == null ||
                 auditoria.getCurso().getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados inválidos");
         }
+
+        if (auditoria.getAudDataHora() == null) {
+            auditoria.setAudDataHora(LocalDateTime.now());
+        }
+
         if (auditoria.getAudNomeAntigo().equals(auditoria.getAudNomeNovo())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O nome novo deve ser diferente do antigo");
@@ -51,7 +56,7 @@ public class AuditoriaServiceImpl implements AuditoriaService {
                     "O nome novo deve começar com letra maiúscula");
         }
 
-        if (auditoria.getAudAutorizacao() != 0 && auditoria.getAudAutorizacao() <= 0) {
+        if (auditoria.getAudAutorizacao() != null && auditoria.getAudAutorizacao() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O código de autorização deve ser maior que 0");
         }
@@ -73,5 +78,14 @@ public class AuditoriaServiceImpl implements AuditoriaService {
         }
         return repo.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Auditoria não encontrada"));
+    }
+
+    @Override
+    public List<Auditoria> buscarPorNomeAntigoECurso(String nomeAntigo, String nomeCurso) {
+        if (nomeAntigo == null || nomeAntigo.isBlank() ||
+                nomeCurso == null || nomeCurso.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parâmetros inválidos");
+        }
+        return repo.buscarPorNomeAntigoECurso(nomeAntigo, nomeCurso);
     }
 }

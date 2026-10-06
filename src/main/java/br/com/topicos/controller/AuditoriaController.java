@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.topicos.entity.Auditoria;
+
 import br.com.topicos.service.AuditoriaService;
 
 @RestController
@@ -46,6 +47,13 @@ public class AuditoriaController {
     @GetMapping("/pesquisa")
     public Auditoria buscarPorIdParam(@RequestParam("id") Long id) {
         return service.buscarPorId(id);
+    }
+
+    @GetMapping("/buscar")
+    public List<Auditoria> buscarPorNomeAntigoECurso(
+            @RequestParam("nomeAntigo") String nomeAntigo,
+            @RequestParam("curso") String nomeCurso) {
+        return service.buscarPorNomeAntigoECurso(nomeAntigo, nomeCurso);
     }
 
 }

@@ -12,4 +12,5 @@ public interface AuditoriaService {
 
     public Auditoria buscarPorId(Long id);
 
+    List<Auditoria> buscarPorNomeAntigoECurso(String nomeAntigo, String nomeCurso);
 }
