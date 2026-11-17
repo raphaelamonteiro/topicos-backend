@@ -31,3 +31,17 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# =========================
+# Ambientes virtuais
+# =========================
+venv/
+.venv/
+env/
+ENV/
+
+# =========================
+# Variáveis de ambiente
+# =========================
+.env
+.envrc
