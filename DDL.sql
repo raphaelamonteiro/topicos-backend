@@ -126,6 +126,39 @@ insert into que_questao (
     )
 values ('Questão 1', '2025-11-10', 1, 0.5),
     ('Questão 2', current_date, 1, null);
+
+create table opc_opcao (
+  opc_id bigint generated always as identity,
+  opc_texto varchar(50) not null,
+  opc_data_criacao date not null,
+  opc_explicacao varchar(100),
+  opc_questao bigint not null,
+  opc_correta boolean not null,
+  primary key(opc_id),
+  unique (opc_texto, opc_questao),
+  constraint opc_que_fk foreign key(opc_questao) references que_questao(que_id)
+);
+
+insert into opc_opcao (opc_texto, opc_data_criacao, opc_questao, opc_correta)
+  values ('Opção 1', '2025-11-10', 1, true),
+    ('Opção 2', current_date, 1, false);
+
+create table ins_instrucao (
+  ins_id bigint generated always as identity,
+  ins_titulo varchar(100) not null,
+  ins_detalhes varchar(200),
+  ins_data_criacao date not null,
+  ins_avaliacao bigint not null,
+  ins_ordem int,
+  primary key(ins_id),
+  unique (ins_titulo, ins_avaliacao),
+  constraint ins_ava_fk foreign key(ins_avaliacao) references ava_avaliacao(ava_id)
+);
+
+insert into ins_instrucao (ins_titulo, ins_data_criacao, ins_avaliacao, ins_ordem)
+  values ('Instrução 1', '2025-11-10', 1, 1),
+    ('Instrução 2', current_date, 1, 2);
+
 grant update,
     delete,
     insert,
